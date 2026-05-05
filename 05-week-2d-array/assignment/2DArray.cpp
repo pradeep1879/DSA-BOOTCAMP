@@ -1,229 +1,237 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
+/*
+---------------------------------------
+HELPER FUNCTION (IMPORTANT)
+---------------------------------------
+We use vector instead of arr[n][m]
+because it's standard and safe.
+*/
+vector<vector<int>> inputMatrix(int n, int m)
+{
+  vector<vector<int>> matrix(n, vector<int>(m));
+
+  cout << "Enter matrix elements:\n";
+  for (int i = 0; i < n; i++)
+  {
+    for (int j = 0; j < m; j++)
+    {
+      cin >> matrix[i][j];
+    }
+  }
+
+  return matrix;
+}
+
+/*
+---------------------------------------
+1. ROW-WISE TRAVERSAL
+---------------------------------------
+Example:
+1 2 3
+4 5 6
+
+Output:
+1 2 3 4 5 6
+*/
 void rowOrder()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
+
+  auto matrix = inputMatrix(n, m);
 
   for (int i = 0; i < n; i++)
   {
     for (int j = 0; j < m; j++)
     {
-      cin >> arr[i][j];
-    }
-  }
-
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cout << arr[i][j] << " ";
+      cout << matrix[i][j] << " ";
     }
   }
 }
 
+/*
+---------------------------------------
+2. COLUMN-WISE TRAVERSAL
+---------------------------------------
+Example:
+1 2 3
+4 5 6
+
+Output:
+1 4 2 5 3 6
+*/
 void columnOrder()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
+  auto matrix = inputMatrix(n, m);
 
   for (int j = 0; j < m; j++)
   {
     for (int i = 0; i < n; i++)
     {
-      cout << arr[i][j] << " ";
+      cout << matrix[i][j] << " ";
     }
   }
 }
 
+/*
+---------------------------------------
+3. FIND MAX ELEMENT
+---------------------------------------
+*/
 void findMaximum()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
+  auto matrix = inputMatrix(n, m);
 
-  int target = arr[0][0];
-  for (int i = 0; i < n; i++)
+  int maxVal = matrix[0][0];
+
+  for (auto row : matrix)
   {
-    for (int j = 0; j < m; j++)
+    for (int val : row)
     {
-      if (arr[i][j] > target)
+      if (val > maxVal)
       {
-        target = arr[i][j];
+        maxVal = val;
       }
     }
   }
 
-  cout << target << endl;
+  cout << "Maximum = " << maxVal << endl;
 }
 
-void searchin2Darray()
+/*
+---------------------------------------
+4. SEARCH IN MATRIX
+---------------------------------------
+*/
+void searchInMatrix()
 {
-  int n, m, x;
-  cin >> n >> m >> x;
-  int arr[n][m];
+  int n, m, target;
+  cin >> n >> m >> target;
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
-  int target = x;
-  bool flag = false;
+  auto matrix = inputMatrix(n, m);
 
-  for (int i = 0; i < n; i++)
+  for (auto row : matrix)
   {
-    for (int j = 0; j < m; j++)
+    for (int val : row)
     {
-      if (arr[i][j] == target)
+      if (val == target)
       {
-        flag = true;
-        break;
+        cout << "Found\n";
+        return;
       }
     }
-    if (flag)
-      break;
   }
 
-  if (flag)
-  {
-    cout << "true";
-  }
-  else
-  {
-    cout << "false";
-  }
+  cout << "Not Found\n";
 }
 
-// Minimum of each row
+/*
+---------------------------------------
+5. MINIMUM OF EACH ROW
+---------------------------------------
+*/
 void rowMinimum()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
+
+  auto matrix = inputMatrix(n, m);
 
   for (int i = 0; i < n; i++)
   {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
+    int minVal = matrix[i][0];
 
-  for (int i = 0; i < n; i++)
-  {
-    int rowMini = arr[i][0];
     for (int j = 0; j < m; j++)
     {
-      if (arr[i][j] < rowMini)
-      {
-        rowMini = arr[i][j];
-      }
+      minVal = min(minVal, matrix[i][j]);
     }
-    cout << rowMini << " ";
+
+    cout << minVal << " ";
   }
 }
 
+/*
+---------------------------------------
+6. COLUMN SUM
+---------------------------------------
+*/
 void columnSum()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
+  auto matrix = inputMatrix(n, m);
 
   for (int j = 0; j < m; j++)
   {
-    int sumOfRow = 0;
+    int sum = 0;
+
     for (int i = 0; i < n; i++)
     {
-      sumOfRow += arr[i][j];
+      sum += matrix[i][j];
     }
-    cout << sumOfRow << " ";
+
+    cout << sum << " ";
   }
 }
 
+/*
+---------------------------------------
+7. ROW WITH MAXIMUM 1s
+---------------------------------------
+Returns index of row
+*/
 void rowWithMax1s()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
 
-  int firstRow = -1;
+  auto matrix = inputMatrix(n, m);
+
+  int bestRow = -1;
   int maxCount = 0;
 
   for (int i = 0; i < n; i++)
   {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
-
-  for (int i = 0; i < n; i++)
-  {
     int count = 0;
+
     for (int j = 0; j < m; j++)
     {
-      if (arr[i][j] == 1)
-      {
+      if (matrix[i][j] == 1)
         count++;
-      }
     }
 
     if (count > maxCount)
     {
-      firstRow = i;
       maxCount = count;
+      bestRow = i;
     }
   }
 
-  cout << firstRow << endl;
+  cout << "Row index: " << bestRow << endl;
 }
 
-// Your task is to print all the elements of the matrix row by row in wave form: Print the
-//  first row from left to right, the second row from right to left, and so on...
-
-void waveIst()
+/*
+---------------------------------------
+8. WAVE TRAVERSAL (ROW-WISE)
+---------------------------------------
+→ Zig-zag rows
+*/
+void waveRowWise()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
+  auto matrix = inputMatrix(n, m);
 
   for (int i = 0; i < n; i++)
   {
@@ -231,32 +239,31 @@ void waveIst()
     {
       for (int j = 0; j < m; j++)
       {
-        cout << arr[i][j] << " ";
+        cout << matrix[i][j] << " ";
       }
     }
     else
     {
       for (int j = m - 1; j >= 0; j--)
       {
-        cout << arr[i][j] << " ";
+        cout << matrix[i][j] << " ";
       }
     }
   }
 }
 
-void waveIIst()
+/*
+---------------------------------------
+9. WAVE TRAVERSAL (COLUMN-WISE)
+---------------------------------------
+→ Zig-zag columns
+*/
+void waveColumnWise()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
+  auto matrix = inputMatrix(n, m);
 
   for (int j = 0; j < m; j++)
   {
@@ -264,83 +271,91 @@ void waveIIst()
     {
       for (int i = 0; i < n; i++)
       {
-        cout << arr[i][j] << " ";
+        cout << matrix[i][j] << " ";
       }
     }
     else
     {
       for (int i = n - 1; i >= 0; i--)
       {
-        cout << arr[i][j] << " ";
+        cout << matrix[i][j] << " ";
       }
     }
   }
 }
 
+/*
+---------------------------------------
+10. BOUNDARY TRAVERSAL
+---------------------------------------
+Print only outer boundary
+*/
 void boundaryTraversal()
 {
   int n, m;
   cin >> n >> m;
-  int arr[n][m];
 
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      cin >> arr[i][j];
-    }
-  }
+  auto matrix = inputMatrix(n, m);
 
+  // Special cases
   if (n == 1)
   {
     for (int j = 0; j < m; j++)
-    {
-      cout << arr[0][j] << " ";
-    }
+      cout << matrix[0][j] << " ";
     return;
   }
 
   if (m == 1)
   {
     for (int i = 0; i < n; i++)
-    {
-      cout << arr[i][0] << " ";
-    }
+      cout << matrix[i][0] << " ";
     return;
   }
 
-  // first row(row=0)
+  // Top row
   for (int j = 0; j < m; j++)
-  {
-    cout << arr[0][j] << " ";
-  }
-  // last column(idx=m-1)
+    cout << matrix[0][j] << " ";
+
+  // Right column
   for (int i = 1; i < n; i++)
-  {
-    cout << arr[i][m - 1] << " ";
-  }
-  // last row (idx=n-1)
+    cout << matrix[i][m - 1] << " ";
+
+  // Bottom row
   for (int j = m - 2; j >= 0; j--)
-  {
-    cout << arr[n - 1][j] << " ";
-  }
-  // first column(idx=0)
+    cout << matrix[n - 1][j] << " ";
+
+  // Left column
   for (int i = n - 2; i >= 1; i--)
-  {
-    cout << arr[i][0] << " ";
-  }
+    cout << matrix[i][0] << " ";
 }
 
+/*
+---------------------------------------
+MAIN FUNCTION
+---------------------------------------
+*/
 int main()
 {
+
   // rowOrder();
+
   // columnOrder();
+
   // findMaximum();
-  // searchin2Darray();
+
+  // searchInMatrix();
+
   // rowMinimum();
+
   // columnSum();
+
   // rowWithMax1s();
-  // waveIst();
-  // waveIIst();
+
+  // waveRowWise();
+
+  // waveColumnWise();
+
   boundaryTraversal();
+
+  return 0;
 }
