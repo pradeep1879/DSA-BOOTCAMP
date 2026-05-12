@@ -1,92 +1,117 @@
 #include <iostream>
 using namespace std;
 
-
-void isVowel(){
+void isVowel()
+{
     char ch;
     cin >> ch;
-    if(ch == 'a' or ch == 'i' or ch == 'o' or ch == 'i' or ch == 'u'){
+    if (ch == 'a' or ch == 'i' or ch == 'o' or ch == 'i' or ch == 'u')
+    {
         cout << "YES";
-    }else{
+    }
+    else
+    {
         cout << "NO";
     }
 }
 
-void secondLastDigit(){
+void secondLastDigit()
+{
     long long digit;
     cin >> digit;
 
-    cout << ((digit/10)%10);
-    
+    cout << ((digit / 10) % 10);
 }
 
-void isLeapYear(){
+void isLeapYear()
+{
     long long year;
     cin >> year;
-    if(((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)){
+    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+    {
         cout << "Yes";
-    }else{
+    }
+    else
+    {
         cout << "No";
     }
 }
 
-void fizzBuzz(){
+void fizzBuzz()
+{
     long long number;
     cin >> number;
 
-    for(int i=1; i<=number; i++){
-        if(i % 3 == 0 && i % 5 != 0){
+    for (int i = 1; i <= number; i++)
+    {
+        if (i % 3 == 0 && i % 5 != 0)
+        {
             cout << "Fizz";
-        }else if(i % 5 == 0 && i % 3 != 0){
+        }
+        else if (i % 5 == 0 && i % 3 != 0)
+        {
             cout << "Buzz";
-        }else if(i % 3 == 0 && i % 5 == 0){
+        }
+        else if (i % 3 == 0 && i % 5 == 0)
+        {
             cout << "FizzBuzz";
-        }else{
+        }
+        else
+        {
             cout << i;
         }
         cout << endl;
     }
 }
 
-void countZeros(){
+void countZeros()
+{
     long long n;
     cin >> n;
     int count = 0;
     long long rev = 0;
-    while(n !=0){
+    while (n != 0)
+    {
         int digit = n % 10;
-        if(digit == 0){
+        if (digit == 0)
+        {
             count++;
         }
-        n = n/10;
+        n = n / 10;
     }
 
     cout << count;
 }
 
-void countGoodNumber(){
+void countGoodNumber()
+{
     int n;
     cin >> n;
     long long x;
     int count = 0;
-    for(int i=0; i<n; i++){
+    for (int i = 0; i < n; i++)
+    {
         cin >> x;
-        if((x != 0 && 18 % x == 0) || (x % 45 == 0)){
+        if ((x != 0 && 18 % x == 0) || (x % 45 == 0))
+        {
             count++;
         }
     }
     cout << count;
 }
 
-void countZerosIncludingInitial() {
+void countZerosIncludingInitial()
+{
     string s;
     cin >> s;
 
     int count = 0;
     string rev = "";
 
-    for (char ch : s) {
-        if (ch == '0') {
+    for (char ch : s)
+    {
+        if (ch == '0')
+        {
             count++;
         }
     }
@@ -99,14 +124,20 @@ void countZerosIncludingInitial() {
     cout << count;
 }
 
-void emptyRectangle(){
+void emptyRectangle()
+{
     long long n, m;
     cin >> n >> m;
-    for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            if(i==0 or i==n-1 or j == 0 or j == m-1){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (i == 0 or i == n - 1 or j == 0 or j == m - 1)
+            {
                 cout << '^';
-            }else{
+            }
+            else
+            {
                 cout << " ";
             }
         }
@@ -114,72 +145,85 @@ void emptyRectangle(){
     }
 }
 
-void shiftedPyramid(){
+void shiftedPyramid()
+{
     int n;
     cin >> n;
-    for(int i=0; i<n; i++){
-        for(int j=0; j<=i+1; j++){
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i + 1; j++)
+        {
             cout << " ";
         }
-        for(int j=0; j<=i; j++){
+        for (int j = 0; j <= i; j++)
+        {
             cout << "x";
         }
         cout << endl;
     }
 }
 
-void hourGlass(){
+void hourGlass()
+{
     long long n;
     cin >> n;
 
-   for(int i = n; i>0; i--){
-      // print leading spaces
-        for(int j = 1; j <= n - i; j++) {
+    for (int i = n; i > 0; i--)
+    {
+        // print leading spaces
+        for (int j = 1; j <= n - i; j++)
+        {
             cout << " ";
         }
 
         // print stars
-        for(int j = 1; j <= i; j++) {
+        for (int j = 1; j <= i; j++)
+        {
             cout << ".";
-            if(j < i) cout << " ";
+            if (j < i)
+                cout << " ";
         }
 
         cout << endl;
     }
 
-    for(int i = 2; i<=n; i++){
-      // print leading spaces
-        for(int j = 1; j <= n - i; j++) {
+    for (int i = 2; i <= n; i++)
+    {
+        // print leading spaces
+        for (int j = 1; j <= n - i; j++)
+        {
             cout << " ";
         }
 
         // print stars
-        for(int j = 1; j <= i; j++) {
+        for (int j = 1; j <= i; j++)
+        {
             cout << ".";
-            if(j < i) cout << " ";
+            if (j < i)
+                cout << " ";
         }
 
         cout << endl;
     }
-
-    
 }
 
-
-void arrow() {
-    long long n;  // middle height
+void arrow()
+{
+    long long n; // middle height
     cin >> n;
-/*solution-1*/
+    /*solution-1*/
 
-    //upper half
-    for (int i = 0; i < n; i++) {
+    // upper half
+    for (int i = 0; i < n; i++)
+    {
         // leading spaces
         for (int s = 0; s < i; s++)
             cout << " ";
 
         cout << ">";
 
-        if (i > 0) {
+        if (i > 0)
+        {
             for (int sp = 0; sp < 2 * i - 1; sp++)
                 cout << " ";
             cout << ">";
@@ -188,13 +232,15 @@ void arrow() {
     }
 
     // lower half
-    for (int i = n - 2; i >= 0; i--) {
+    for (int i = n - 2; i >= 0; i--)
+    {
         for (int s = 0; s < i; s++)
             cout << " ";
 
         cout << ">";
 
-        if (i > 0) {
+        if (i > 0)
+        {
             for (int sp = 0; sp < 2 * i - 1; sp++)
                 cout << " ";
             cout << ">";
@@ -204,39 +250,46 @@ void arrow() {
 
     cout << endl;
 
-/*solution-2*/
-    for(int i=0; i<n; i++){
-        for(int j=0; j<=i-1; j++){
+    /*solution-2*/
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j <= i - 1; j++)
+        {
             cout << " ";
         }
         cout << ">";
-        if(i !=0 ){
-            for(int j=0; j<2*i-1; j++){
+        if (i != 0)
+        {
+            for (int j = 0; j < 2 * i - 1; j++)
+            {
                 cout << " ";
             }
             cout << ">";
-        }   
+        }
         cout << endl;
     }
 
-    for(int i=n-2; i>=0; i--){
-        for(int j=0; j<=i-1; j++){
+    for (int i = n - 2; i >= 0; i--)
+    {
+        for (int j = 0; j <= i - 1; j++)
+        {
             cout << " ";
         }
         cout << ">";
-        if(i !=0 ){
-            for(int j=0; j<2*i-1; j++){
+        if (i != 0)
+        {
+            for (int j = 0; j < 2 * i - 1; j++)
+            {
                 cout << " ";
             }
             cout << ">";
-        }   
+        }
         cout << endl;
     }
-
 }
 
-
-int main(){
+int main()
+{
     // isVowel();
     // secondLastDigit();
     // countGoodNumber();
@@ -249,14 +302,10 @@ int main(){
     // hourGlass();
     arrow();
 
-    
     // long long n;
     // cin >> n;
 
     // for(int i = 1; i<=n; i++){
     //     cout << "Hello Codeforces " << i << endl;
     // }
-    
 }
-
-
