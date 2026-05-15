@@ -137,12 +137,207 @@
     }
   }
 
+ 
+
+  // void checkPowerOf2(){
+  //   long long n;
+  //   cin >> n;
+
+  //   long  long count = 0;
+  //   for(int i = 31; i >= 0; i--){
+  //     if(checkIthBit(n, i)){
+  //       count++;
+  //     }
+  //   }
+  //   if(count == 1){
+  //     cout << "YES\n";
+  //   }else{
+  //     cout << "NO\n";
+  //   }
+  // }
+
+  void checkPowerOf2(){
+    long long n;
+    cin >> n;
+    if(n > 0 && (n & (n - 1)) == 0){
+      cout << "YES\n";
+    }else{
+      cout << "NO\n";
+    }
+  }
+
+  void oddEvenWithoutModulo(){
+    long long n;
+    cin >> n;
+
+    if((n & 1) == 0){
+      cout << "Even\n";
+    }else{
+      cout << "Odd\n";
+    }
+  }
+
+   bool checkIthBit(long long n, int i){
+    long long mask = 1LL << i;
+    return (n & mask) != 0;
+  }
+
+
+  // void countSetBit(){
+  //   int n;
+  //   cin >> n;
+
+  //   int count = 0;
+  //   for(int i = 31; i >= 0; i--){
+  //     if(checkIthBit(n, i)){
+  //       count++;
+  //     }
+  //   }
+
+  //   cout << count << endl;
+
+  // }
+
+  void countSetBit(){
+    long long n;
+    cin >> n;
+
+    long long count = 0;
+    while(n != 0){
+      count++;
+      n = n & (n-1); // remove right most set bit
+    }
+    cout << count << endl;
+  }
+
+
+  void singleNumberI(){
+    int n;
+    cin >> n;
+    int arr[n];
+    for(int i = 0; i < n; i++){
+      cin >> arr[i];
+    }
+
+    int ans = 0;
+    for(int x: arr){
+      ans ^= x;
+    }
+    cout << ans << "\n";
+  }
+
+
+  void singleNumberII(){
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for(int i = 0; i < n; i++){
+      cin >> arr[i];
+    }
+
+    int ans = 0;
+    for(int j = 0; j < 31; j++){
+      int sum  = 0;
+      for(int i = 0; i < n; i++){
+        if(checkIthBit(arr[i], j)){
+          sum++;
+        }
+      }
+      
+      if(sum % 3 != 0){
+        ans = ans | (1LL << j);
+      }
+    }
+
+    cout << ans << "\n";
+
+  }
+
+  void singleNumberIII(){
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for(int i = 0; i < n; i++){
+      cin >> arr[i];
+    }
+
+    // XOR for the entire array
+    int xor_arr = 0;
+    for(int x: arr){
+      xor_arr ^= x;
+    }
+
+    // figure out any position in which they both differe
+    // => position of any setbit in xor_arr
+
+    int pos = -1;
+    for(int i = 0; i < 32; i++){
+      if(checkIthBit(xor_arr, i)){
+        pos = i;
+        break;
+      }
+    }
+
+    // xor of groups seperately
+
+    int group1 = 0;
+    int group2 = 0;
+
+    for(int x: arr){
+      if(checkIthBit(x, pos)){
+        group1 ^= x;
+      }else{
+        group2 ^= x;
+      }
+    }
+    
+    if(group1 < group2){
+      cout << group1 << " " << group2 << "\n";
+    }else{
+      cout << group2 << " " << group1 << "\n";
+    }
+
+  }
+
+
+  void printAllSubsets(){
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for(int i = 0; i < n; i++){
+      cin >> arr[i];
+    }
+
+    // no of subsets equal to 2^n;
+    for(int mask = 1; mask < (1 << n); mask++){
+      for(int i = 0; i < n; i++){
+        if(mask & (1 << i)){
+          cout << arr[i] << " ";
+        }
+      }
+      cout << "\n";
+    }
+  }
+
+
   int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
     // powersOf2();
     // breakDownN();
     // decimalToBinary();
     // binaryToDecimal();
     // bitWiseOperatorI();
     // bitWiseOperatorII();
-    bitWiseQueries();
+    // bitWiseQueries();
+    // checkPowerOf2();
+    // oddEvenWithoutModulo();
+    // countSetBit();
+    // singleNumberI();
+    // singleNumberII();
+    // singleNumberIII();
+    printAllSubsets();
   }
