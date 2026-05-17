@@ -265,13 +265,160 @@ void mergeTwoSortedArray()
   cout << endl;
 }
 
-/*
----------------------------------------
-MAIN FUNCTION
----------------------------------------
-- Uncomment the function you want to run
----------------------------------------
-*/
+
+
+void selectionSortTrace(){
+  int n;
+  cin >> n;
+
+  int arr[n];
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
+
+  for(int i = 0; i < n-1; i++){
+    int minimum = arr[i];
+    int loc = i;
+
+    for(int j = i + 1; j < n; j++){
+      if(arr[j] < minimum){
+        minimum = arr[j];
+        loc = j;
+      }
+    }
+    swap(arr[i], arr[loc]);
+
+    cout << "Pass " << i + 1 << ": ";
+
+    for(int k = 0; k < n; k++){
+      cout << arr[k] << " ";
+    }
+
+    cout << ", min_selected = " << minimum << endl;
+  }
+}
+
+
+void insertionSortTrace(){
+  int n;
+  cin >> n;
+
+  int arr[n];
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
+
+  for(int i = 1; i < n; i++){
+    int key = arr[i];
+    int j = i - 1;
+
+    int shifts = 0;
+
+    while(j >= 0 && arr[j] > key){
+      arr[j+1] = arr[j];
+      j--;
+      shifts++;
+    }
+    arr[j+1] = key;
+
+
+    cout << "Pass " << i << ": ";
+  
+    for(int i = 0; i < n; i++){
+      cout << arr[i] << " ";
+    }
+    
+    cout << ", ";
+
+    // Sorted part
+    for(int k = 0; k <= i; k++){
+      cout << arr[k] << " ";
+    }
+
+    cout << "| ";
+
+    // Unsorted part
+    for(int k = i+1; k < n; k++){
+      cout << arr[  k] << " ";
+    }
+
+    cout << ", shifts = " << shifts << "\n";
+
+  }
+
+}
+
+void selectionSortVSinsertionSort() {
+  int n;
+  cin >> n;
+
+  int arr[n];
+
+  for(int i = 0; i < n; i++) {
+    cin >> arr[i];
+  }
+
+  // Copy arrays
+  int insertion[n];
+  int selection[n];
+
+  for(int i = 0; i < n; i++) {
+    insertion[i] = arr[i];
+    selection[i] = arr[i];
+  }
+
+  // Count insertion sort shifts
+  int shifts = 0;
+
+  for(int i = 1; i < n; i++) {
+
+      int key = insertion[i];
+      int j = i - 1;
+
+      while(j >= 0 && insertion[j] > key) {
+        insertion[j + 1] = insertion[j];
+        j--;
+        shifts++;
+      }
+
+      insertion[j + 1] = key;
+  }
+
+  // Count selection sort swaps
+  int swaps = 0;
+
+  for(int i = 0; i < n - 1; i++) {
+
+      int minimum = selection[i];
+      int loc = i;
+
+      for(int j = i + 1; j < n; j++) {
+          if(selection[j] < minimum) {
+            minimum = selection[j];
+            loc = j;
+          }
+      }
+
+      // Count only real swaps
+      if(loc != i) {
+        swap(selection[i], selection[loc]);
+          swaps++;
+      }
+  }
+
+  // Compare
+  if(shifts < swaps) {
+    cout << "Insertion Sort" << endl;
+  }
+  else if(swaps < shifts) {
+    cout << "Selection Sort" << endl;
+  }
+  else {
+    cout << "Tie" << endl;
+  }
+}
+
+
 int main()
 {
 
@@ -283,7 +430,15 @@ int main()
 
   // bubbleSortTrace();
 
-  mergeTwoSortedArray();
+  // mergeTwoSortedArray();
+  // selectionSortTrace();
+  // insertionSortTrace()
+
+  int t;
+  cin >> t;
+  while(t--){
+    selectionSortVSinsertionSort();
+  }
 
   return 0;
 }
