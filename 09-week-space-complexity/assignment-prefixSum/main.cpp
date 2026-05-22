@@ -214,6 +214,9 @@ int countFactors(int x){
     return count;
 }
 
+
+
+
 void countNumbersWithExactlyKFactors(){
   int n, q, k;
   cin >> n >> q >> k;
