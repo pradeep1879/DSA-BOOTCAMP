@@ -85,7 +85,14 @@ int findMin(Node* head){
 }
 
 int findKth(Node* head, int k){
-  
+  if(head == NULL) return -1;
+  auto ptr = head;
+
+  for(int i = 0; i < k -1; i++){
+    ptr = ptr -> next;
+    if(ptr == NULL) return -1;
+  }
+  return ptr->val;
 }
 
 int main() {
