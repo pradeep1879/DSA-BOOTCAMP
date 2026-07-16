@@ -95,6 +95,23 @@ int findKth(Node* head, int k){
   return ptr->val;
 }
 
+int kthFromEnd(Node* head, int k){
+  if(head == NULL) return -1;
+
+  auto slow = head;
+  auto fast = head;
+  for(int i = 1; i <= k; i++){
+    if(fast == NULL) return -1;
+    fast = fast->next;
+  }
+  while(fast != NULL){
+    slow = slow->next;
+    fast = fast->next;
+  }
+
+  return slow->val;
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
@@ -114,8 +131,13 @@ int main() {
 
     // cout << findMin(ll.head) << "\n";
 
+    // int k;
+    // cin >> k;
+    // cout << findKth(ll.head, k) << "\n";
+
     int k;
     cin >> k;
-    cout << findKth(ll.head, k) << "\n";
+
+    cout << kthFromEnd(ll.head, k) << "\n";
     return 0;
 }
