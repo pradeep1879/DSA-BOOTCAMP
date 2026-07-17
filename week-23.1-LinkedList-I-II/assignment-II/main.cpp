@@ -56,7 +56,12 @@ Node* getIntersectionNode(Node* headA, Node* headB) {
     return ptr1;
 }
 
-
+void deleteNode(Node* node){
+  node->val = node->next->val;
+  auto temp = node->next;
+  node->next = temp->next;
+  delete temp;
+}
 
 int main() {
     ios::sync_with_stdio(false);
