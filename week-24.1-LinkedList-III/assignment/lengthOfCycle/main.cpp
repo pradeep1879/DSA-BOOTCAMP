@@ -66,10 +66,10 @@ int lengthOfLoop(Node* head){
 
     if(slow == fast){
       // Count cycle length
-      int count = 0;
+      int count = 1;
       fast = fast->next;
 
-      while(slow != fast){
+      while(fast != slow){
         count++;
         fast = fast->next;
       }
