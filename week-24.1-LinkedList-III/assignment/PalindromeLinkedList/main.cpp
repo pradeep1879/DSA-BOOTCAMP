@@ -51,8 +51,47 @@ public:
     Return true if the linked list is a palindrome, otherwise false.
 */
 
-bool isPalindrome(Node* head){
-  
+bool isPalindrome(Node* head)
+{
+    if (head == nullptr || head->next == nullptr)
+        return true;
+
+    // Find the middle
+    Node* slow = head;
+    Node* fast = head;
+
+    while (fast->next != nullptr && fast->next->next != nullptr)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // Reverse second half
+    Node* prev = nullptr;
+    Node* curr = slow->next;
+
+    while (curr != nullptr)
+    {
+        Node* nextNode = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nextNode;
+    }
+
+    // Compare both halves
+    Node* first = head;
+    Node* second = prev;
+
+    while (second != nullptr)
+    {
+        if (first->val != second->val)
+            return false;
+
+        first = first->next;
+        second = second->next;
+    }
+
+    return true;
 }
 
 int main()
