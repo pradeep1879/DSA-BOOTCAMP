@@ -22,6 +22,9 @@ string doubleTrobble(string s){
     st.top();
   }
 
-  
+}
 
+
+string KTrobble(string s, int k){
+  // Group of K equal nbs;
 }
