@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 using namespace std;
 
 /*
@@ -6,25 +7,41 @@ using namespace std;
 */
 class MinStack {
 public:
+  stack<pair<long long, long long>> st;
     MinStack() {
         // implement
     }
 
     void push(long long x) {
         // implement
+        if(st.empty()){
+          st.push({x, x});
+        }
+        else 
+        {
+          st.push({x, min(x, getMin())});
+        }
     }
 
     void pop() {
         // implement
+        if (!st.empty())
+          st.pop();
     }
 
     long long top() {
         // implement
+        if(!st.empty()){
+         return st.top().first;
+        }
         return -1;
     }
 
     long long getMin() {
         // implement
+        if(!st.empty()){
+          return st.top().second;
+        }
         return -1;
     }
 };
