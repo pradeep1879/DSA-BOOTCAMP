@@ -4,12 +4,12 @@ using namespace std;
 
 bool isOpening(char ch)
 {
-    return ch == '(';
+  return ch == '(';
 }
 
 bool isClosing(char ch)
 {
-    return ch == ')';
+  return ch == ')';
 }
 
 void closingBracketIndex(string s, int k)
@@ -40,12 +40,63 @@ void closingBracketIndex(string s, int k)
   cout << -1 << "\n"; // no matching closing bracket
 }
 
+void maximumNestingDepth(string s)
+{
+  stack<char> st;
 
-int main(){
+  int ans = 0;
+
+  for (char ch : s)
+  {
+    if (isOpening(ch))
+    {
+      st.push(ch);
+      ans = max(ans, (int)st.size());
+    }
+    else if (isClosing(ch))
+    {
+      if (!st.empty())
+      {
+        st.pop();
+      }
+    }
+  }
+
+  cout << ans << "\n";
+}
+
+// int maximumNestingDepth(string s)
+// {
+//     int depth = 0, ans = 0;
+
+//     for (char ch : s)
+//     {
+//         if (ch == '(')
+//         {
+//             depth++;
+//             ans = max(ans, depth);
+//         }
+//         else if (ch == ')')
+//         {
+//             depth--;
+//         }
+//     }
+
+//     return ans;
+// }
+
+int main()
+{
+  // string s;
+  // cin >> s;
+  // int n;
+  // cin >> n;
+
+  // closingBracketIndex(s, n);
+
   string s;
   cin >> s;
-  int n;
-  cin >> n;
 
-  closingBracketIndex(s, n);
+  maximumNestingDepth(s);
+
 }
