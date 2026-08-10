@@ -4,6 +4,7 @@
 #include <algorithm>
 using namespace std;
 
+#define int long long
 
 void maximalRectangleBrutForce(){
   int n;
@@ -31,8 +32,4 @@ void maximalRectangleBrutForce(){
   }
 
   cout << ans;
-}
-
-int main(){
-  maximalRectangleBrutForce();
 }
