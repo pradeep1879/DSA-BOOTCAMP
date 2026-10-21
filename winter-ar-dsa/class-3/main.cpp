@@ -146,6 +146,229 @@ void maximumOfAllSubarrays(){
 }
 
 
+void rangeSumQuery(){
+  int n;
+  cin >> n;
+  int arr[n];
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
+
+  long long preFixSum[n];
+  long long sum = 0;
+  for(int i = 0; i < n; i++)  {
+    sum += arr[i];
+    preFixSum[i] = sum;
+  }
+  
+  int q;
+  cin >> q;
+  while(q--){
+    int l, r;
+    cin >> l >> r;
+
+    l--;
+    r--;
+
+    if(l == 0){
+      cout << preFixSum[r] << endl;
+    }else{
+      cout << preFixSum[r] - preFixSum[l - 1] << endl;
+    }
+  }
+
+}
+
+
+void evenSumQuery(){
+  int n;
+  cin >> n;
+  vector<long long> arr(n+1);
+  for(int i = 1; i <= n; i++){
+    cin >> arr[i];
+  }
+
+  vector<long long> preFixSum(n+1, 0);
+  long long sum = 0;
+  for(int i = 1; i <= n; i++)  {
+    if(i % 2 == 0){
+      sum += arr[i];
+    }else{
+      sum += 0;
+    }
+    preFixSum[i] = sum;
+  }
+
+  int q;
+  cin >> q;
+  while(q--){
+    int l, r;
+    cin >> l >> r;
+
+  if(l == 0){
+      cout << preFixSum[r] << endl;
+    }else{
+      cout << preFixSum[r] - preFixSum[l - 1] << endl;
+    }
+    
+  }
+}
+
+bool isVowel (char c){
+  return (c == 'a' or c == 'e' or c =='i' or c =='o' or c == 'u');
+}
+
+void countVowels(){
+  int n;
+  cin >> n;
+
+  string s;
+  cin >> s;
+  
+
+  vector<int> prefix(n);
+  long long sum = 0;
+  for(int i = 0; i < n; i++){
+    if(isVowel(s[i])){
+      sum++ ;
+    }
+    prefix[i] = sum;
+  }
+
+  int q;
+  cin >> q;
+  while(q--){
+    int l, r;
+    cin >> l >>r;
+    l--;
+    r--;
+
+    if(l == 0){
+      cout << prefix[r] << "\n";
+    }else {
+      cout << prefix[r] - prefix[l-1] << "\n";
+    }
+  }
+
+}
+
+void rangeSumOfSquares(){
+  int n, q;
+  cin >> n >> q;
+
+  int arr[n];
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
+
+  vector<long long> prefix(n,0);
+  long long sum = 0;
+  for(int i = 0; i < n; i++){
+    sum += 1LL * arr[i] * arr[i];
+    prefix[i] = sum;
+  }
+
+  while(q--){
+    int l, r;
+    cin >> l >>r;
+    l--;
+    r--;
+
+    if(l == 0){
+      cout << prefix[r] << "\n";
+    }else {
+      cout << prefix[r] - prefix[l-1] << "\n";
+    }
+  }
+}
+
+bool digitSum(int x, int k){
+    int sum = 0;
+    while (x > 0){
+        sum += x % 10;
+        x /= 10;
+    }
+    return sum == k ;
+}
+
+void countNumbersWithDigitSumK(){
+  int n, q, k;
+  cin >> n >> q >> k;
+
+  vector<long long> arr(n);
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
+
+  vector<long long> prefix(n);
+  long long sum = 0;
+  for(int i = 0; i < n; i++){
+    if(digitSum(arr[i],k)){
+      sum++;
+    }
+    prefix[i] = sum;
+  }
+  while(q--){
+    int l, r;
+    cin >> l >>r;
+    l--;
+    r--;
+
+    if(l == 0){
+      cout << prefix[r] << "\n";
+    }else {
+      cout << prefix[r] - prefix[l-1] << "\n";
+    }
+  }
+}
+
+bool countFactors(int x, int k){
+    int count = 0;
+
+    for(int i = 1; i * i <= x; i++){
+        if(x % i == 0){
+            if(i * i == x){
+                count += 1;   // perfect square
+            } else {
+                count += 2;   // pair factors
+            }
+        }
+    }
+
+    return count == k;
+}
+
+void countFactorsWithExactalyKFactors(){
+  int n, q, k;
+  cin >> n >> q >> k;
+
+  vector<long long> arr(n);
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
+
+  vector<long long> prefix(n);
+  long long sum = 0;
+  for(int i = 0; i < n; i++){
+    if(countFactors(arr[i],k)){
+      sum++;
+    }
+    prefix[i] = sum;
+  }
+  while(q--){
+    int l, r;
+    cin >> l >>r;
+    l--;
+    r--;
+
+    if(l == 0){
+      cout << prefix[r] << "\n";
+    }else {
+      cout << prefix[r] - prefix[l-1] << "\n";
+    }
+  }
+
+}
 
 int main(){
   // printAllSubArray();
@@ -153,6 +376,15 @@ int main(){
   // sumOfAllSubArraysSeperatelyHard();
   // sumOfAllSubarraysEasy();
   // sumOfAllSubarraysHard();
-  maximumOfAllSubarrays();
+  // maximumOfAllSubarrays();
   // sumOfAllSubArraysMedium();
+
+  // rangeSumQuery();
+  // evenSumQuery();
+  // countVowels();
+//  rangeSumOfSquares();
+// countNumbersWithDigitSumK();
+
+  countFactorsWithExactalyKFactors();
+
 }
