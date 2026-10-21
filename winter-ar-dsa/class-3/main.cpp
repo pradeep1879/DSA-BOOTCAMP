@@ -370,6 +370,51 @@ void countFactorsWithExactalyKFactors(){
 
 }
 
+
+void alternatingRangeSum(){
+  int n, q;
+  cin >> n >> q;
+
+  int arr[n];
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
+
+  vector<int> prefix(n);
+  long long sum = 0;
+  for(int i = 0; i < n; i++){
+    if(i % 2 == 0){
+      sum += arr[i];
+    }else{
+      sum -= arr[i];
+    }
+
+    prefix[i] = sum;
+  }
+
+   while (q--) {
+    int l, r;
+    cin >> l >> r;
+
+    l--;
+    r--;
+
+    long long ans = prefix[r];
+
+    if(l > 0) {
+        ans -= prefix[l - 1];
+    }
+
+    // adjust the sign when the starting index is odd
+    if(l % 2 != 0) {
+        ans = -ans;
+    }
+
+    cout << ans << "\n";
+    }
+
+}
+
 int main(){
   // printAllSubArray();
   // sumOfSubArraySeperately();
@@ -385,6 +430,8 @@ int main(){
 //  rangeSumOfSquares();
 // countNumbersWithDigitSumK();
 
-  countFactorsWithExactalyKFactors();
+  // countFactorsWithExactalyKFactors();
+  alternatingRangeSum();
+
 
 }
