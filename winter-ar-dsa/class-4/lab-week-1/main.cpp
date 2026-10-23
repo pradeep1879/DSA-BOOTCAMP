@@ -168,8 +168,51 @@ void countLocalMaximas(){
   }
 }
 
+void equilibriumPoint(){
+  int n;
+  cin >> n;
+
+  vector<int> arr(n);
+  int rightSum = 0;
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+    rightSum += arr[i];
+  }
+
+   int leftSum = 0;
+  for(int i = 0; i < n; i++){
+    rightSum -+ arr[i];
+    if(rightSum == leftSum){
+      cout << i;
+      break;
+    }
+    leftSum += arr[i];
+  }
+
+  cout << -1;
+}
+
+int sum(int arr[], int l, int r){
+  int sum = 0;
+  for(int i = l; i < r; i++){
+    sum += arr[i];
+  }
+  return sum;
+}
+
+void splitAnArrayIntoEqualSumSubArrays(){
+  int n;
+  cin >> n;
+
+  vector<int> arr(n);
+  for(int i = 0; i < n; i++){
+    cin >> arr[i];
+  }
 
 
+  
+  
+}
 
 int main(){
   // isEveryoneSame();
