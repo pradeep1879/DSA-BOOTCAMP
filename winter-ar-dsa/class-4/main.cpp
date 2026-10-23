@@ -67,7 +67,44 @@ void arrayManipulationII() {
 }
 
 
+void toggleBinaryArray() {
+    int n, q;
+    cin >> n >> q;
+
+    vector<int> arr(n + 1);
+
+    for (int i = 1; i <= n; i++) {
+        cin >> arr[i];
+    }
+
+    vector<int> diffArr(n + 2, 0);
+
+    while (q--) {
+      int a, b;
+      cin >> a >> b;
+
+      diffArr[a] += 1;
+      diffArr[b + 1] -= 1;
+    }
+
+    int current = 0;
+
+    for (int i = 1; i <= n; i++) {
+        current += diffArr[i];
+
+        // toggle only when the number of toggles is odd
+        if (current % 2 == 1) {
+            arr[i] ^= 1;
+        }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << '\n';
+}
 int main() {
     // arrayManipulation();
-    arrayManipulationII();
+    // arrayManipulationII();
+    toggleBinaryArray();
 }
